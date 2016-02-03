@@ -40,8 +40,6 @@ var expectedBt = {
 			}
 		}
 	},
-	currentNode : null,
-    totalNodes : 10
 };
 
 describe('BinaryTree', () => {
@@ -154,15 +152,26 @@ describe('BinaryTree', () => {
 		it('removes node which contains passed data', () => {
 			sinon.spy(bt, 'contains');
 
-			/*bt.remove(15);
+			bt.remove(15);
 			btCopy.root.right.left = null;
 
 			bt.should.deep.equal(btCopy);
 
-			bt.remove(8);
+			/*bt.remove(8);
 			btCopy.root.left.left = btCopy.root.left.left.left;
 
 			bt.should.deep.equal(btCopy);*/
+
+			bt.remove(12);
+			btCopy.root.left.right = btCopy.root.left.right.left;
+
+			bt.should.deep.equal(btCopy);		
+
+
+			bt.remove(6);
+			btCopy.root.left.left.left = btCopy.root.left.left.left.right;
+
+			bt.should.deep.equal(btCopy);					
 		});
 	});
 
@@ -185,11 +194,11 @@ describe('BinaryTree', () => {
 
 			bt.size().should.equal(10);
 
-			/*bt.remove(8);
+			bt.remove(8);
 			bt.remove(18);
 			bt.remove(20);
 
-			bt.size().should.equal(7);*/
+			bt.size().should.equal(7);
 		});
 	});
 
@@ -201,8 +210,8 @@ describe('BinaryTree', () => {
 			bt.insert(5);
 			bt.isEmpty().should.equal(false);
 
-			/*bt.remove(5);
-			bt.isEmpty().should.equal(true);*/
+			bt.remove(5);
+			bt.isEmpty().should.equal(true);
 		});
 	});
 });

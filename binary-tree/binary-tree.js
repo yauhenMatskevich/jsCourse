@@ -5,121 +5,89 @@ class BinaryTree {
 	constructor() {
 
          this.root = null;
-         this.currentNode = null;
-         this.totalNodes = 0;
          
          console.log('root', this.root);       
-         console.log("totalNodes = ", this.totalNodes);
 	}
   //--------------------------------------------------------------
 	insert(data) {
 
     	if (this.root == null) { 
 
-    		  this.root = new Node(data, null, null);      
-
-          this.totalNodes += 1;   
-
-          console.log("totalNodes = ", this.totalNodes);          
+    		  this.root = new Node(data, null, null);               
   		}	 
-    
+
     	else {
         
-       	  var current = this.root;
+       	  var currentNode = this.root;
 
     		  while(true) {
     	 
-              if (data >= current.data) {
+              if (data >= currentNode.data) {
       		        
-                  if(current.right == null) {
+                  if(currentNode.right == null) {
           		
-              		    current.right = new Node(data, null, null);
-
-              		    this.totalNodes += 1; 
-
-              		    console.log("totalNodes = ", this.totalNodes);
+              		    currentNode.right = new Node(data, null, null);
      
                       break;
                   }  
          			    else {
           		           			   
-                      current = current.right;
-                  }  
-      		
+                      currentNode = currentNode.right;
+                  }       		
               }
               else {
       	         		
-                	if(current.left == null) {
+                	if(currentNode.left == null) {
           		
-              	   		current.left = new Node(data, null, null);
-
-              		  	this.totalNodes += 1; 
-
-                      console.log("totalNodes = ", this.totalNodes);              
+              	   		currentNode.left = new Node(data, null, null);             
            
                 			break;
             			} 
             			else {
  
-                			current = current.left;
+                			currentNode = currentNode.left;
             			}
       		  	} 
           }
-    		//console.log("currentNode = ", current);
    		}
-   		//console.log("this.root = ", this.root);
 	}
   //--------------------------------------------------------------
   contains(data) {
+  
+      var currentNode = this.root;
 
-      if(this.currentNode == null)
-      {  
-          this.currentNode = this.root;
-      }    
+      while(true) {  
 
-      if (this.isEmpty() == true) {
+          if (currentNode == null) {     
 
-          this.root = this.currentNode;
+              console.log("currentNode = ", currentNode);  
 
-          this.currentNode = null;
+              return false;
+          }  
 
-          console.log("this.root = ", this.root); 
+          console.log("currentNode.data = ", currentNode.data); 
 
-          return false;    
-      }
-      else {
+          if(data < currentNode.data) {
 
-          console.log("this.root.data = ", this.root.data); 
+              currentNode = currentNode.left;
 
-          if(data < this.root.data) {
-
-              this.root = this.root.left;
-
-              console.log("contains = left", this.root); 
-
-              return this.contains(data);          
+              console.log("contains = left", currentNode); 
+          
           }
-          else if(data > this.root.data) {
+          else if(data > currentNode.data) {
 
-              this.root = this.root.right;
+              currentNode = currentNode.right;
 
-              console.log("contains = right", this.root); 
-
-              return this.contains(data);
+              console.log("contains = right", currentNode); 
 
           }  
           else {
 
-              this.root = this.currentNode;
-
-              this.currentNode = null;
-
               return true;    
           }  
+      }          
+  }  
 
-      }
-
-  }
   //--------------------------------------------------------------
 	remove(data) {
 
@@ -127,22 +95,173 @@ class BinaryTree {
 
       console.log("remove method"); 
 
-      if (this.contains(data) == false) {
+      var currentNode = this.root;
+      var parrentNode = null;
 
-          console.log("there is nothing to remove");
+      // search node with data
+      while(true) {  
 
-          return false;
+          if (currentNode == null) {     
+
+              console.log("currentNode = ", currentNode);  
+
+              console.log("there is nothing to remove");              
+
+              return false;
+          }  
+
+          console.log("currentNode.data = ", currentNode.data); 
+
+          if(data < currentNode.data) {
+
+              parrentNode = currentNode;
+
+              currentNode = currentNode.left;
+
+              console.log("contains = left", currentNode); 
+          
+          }
+          else if(data > currentNode.data) {
+
+              parrentNode = currentNode;
+
+              currentNode = currentNode.right;
+
+              console.log("contains = right", currentNode); 
+
+          }  
+          else {
+
+              console.log("find node = ", currentNode); 
+
+              break;    
+          }
+
       }
-      else{
 
-      }
+      // remove this node
+
+      // if node has no children
+      if((currentNode.left == null) && (currentNode.right == null)) {
+
+          if(parrentNode == null) {
+
+              this.root = null;
+
+              console.log("this.root = ", this.root); 
+          }     
+ 
+          else if(parrentNode.left.data == data) {
+                                 
+              parrentNode.left = null;
+          } 
+          else if(parrentNode.right.data == data) {
+
+              parrentNode.right = null;
+          }
+
+          console.log("currentNode = ", currentNode); 
+
+          console.log("parrentNode = ", parrentNode);   
+      }   
+
+      // if node has one child
+      else if((currentNode.left != null) && (currentNode.right == null)) {
+
+          if(parrentNode.left.data == data) {
+
+              console.log("currentNode = ", currentNode);                       
+                                 
+              parrentNode.left = currentNode.left;
+
+              console.log("parrentNode = ", parrentNode);
+          }  
+          else if(parrentNode.right.data == data) { 
+
+              console.log("currentNode = ", currentNode);                       
+                                 
+              parrentNode.right = currentNode.left;
+
+              console.log("parrentNode = ", parrentNode);
+          }     
+
+          currentNode.left = null; 
+
+          console.log("currentNode = ", currentNode); 
+
+          console.log("this.root = ", this.root); 
+      }   
+
+      else if((currentNode.left == null) && (currentNode.right != null)) {
+
+          if(parrentNode.left.data == data) {                     
+                                 
+              parrentNode.left = currentNode.right;
+
+              //console.log("parrentNode = ", parrentNode);
+          }  
+          else if(parrentNode.right.data == data) {                   
+                                 
+              parrentNode.right = currentNode.right;
+
+              //console.log("parrentNode = ", parrentNode);
+          }     
+
+          currentNode.right = null; 
+
+          console.log("this.root = ", this.root); 
+      }        
 	}
   //--------------------------------------------------------------
 	size() {
 
-      console.log("size = ", this.totalNodes);   
+      var totalNodes = 0;
 
-      return this.totalNodes;
+      if(this.root == null) {
+
+          console.log("totalNodes = ", totalNodes); 
+
+          return totalNodes;
+      }
+ 
+      /*var currentNode = this.root;
+
+      while(true) {  
+
+          if (currentNode != null) {     
+
+              totalNodes += 1;
+
+              if (currentNode.data) {};
+
+              console.log("totalNodes = ", totalNodes);  
+
+              currentNode = currentNode.left;
+          }  
+
+          console.log("currentNode.data = ", currentNode.data); 
+
+          if(data < currentNode.data) {
+
+              currentNode = currentNode.left;
+
+              console.log("contains = left", currentNode); 
+          
+          }
+          else if(data > currentNode.data) {
+
+              currentNode = currentNode.right;
+
+              console.log("contains = right", currentNode); 
+
+          }  
+          else {
+
+              return true;    
+          }  
+      }*/
+
+      return totalNodes;
 	}
   //--------------------------------------------------------------
 	isEmpty() {
