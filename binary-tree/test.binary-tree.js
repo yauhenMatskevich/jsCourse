@@ -193,12 +193,12 @@ describe('BinaryTree', () => {
 
 			bt.size().should.equal(10);
 
-			/*bt.remove(8);
+			bt.remove(8);
 			bt.remove(10);
             bt.remove(18);
 			bt.remove(20);
 	
-			bt.size(bt.root).should.equal(6);*/
+			bt.size(bt.root).should.equal(6);
 		});
 	});
 

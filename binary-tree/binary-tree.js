@@ -202,35 +202,53 @@ class BinaryTree {
     
       var totalNodes = 0;
       var currentNode = this.root;
+      var stack = [];
+      var stackSize = 0;
       //var parrentNode = null;
       
     
-      if (currentNode == null) {     
+      /*if (currentNode == null) {     
 
           console.log("totalNodes", totalNodes);              
 
           return totalNodes;
-      }  
+      } */ 
 
       //totalNodes = 1;
 
-      while(currentNode != null) {
+      while(stackSize != 0 || currentNode != null) {
 
-          //currentNode = currentNode.left;   
+          //currentNode = currentNode.left;  
+          if(currentNode != null)  {
 
-          totalNodes++;       
+              totalNodes++;       
 
-          console.log("node = ", currentNode);
-          console.log("data = ", currentNode.data);
-          console.log("totalNodes = ", totalNodes);
+              console.log("node = ", currentNode);
+              console.log("totalNodes = ", totalNodes);
 
-          if(currentNode.left == null) {
-              currentNode = currentNode.right; 
+              if(currentNode.right != null) {
+
+                  stack[stackSize] = currentNode.right;                 
+
+                  stackSize++;
+
+                  console.log("stackSize = ", stackSize);
+              }
+
+              currentNode = currentNode.left;
           }
-          else
-          {
-              currentNode = currentNode.left; 
-          }    
+          else {
+
+              stackSize--;
+
+              currentNode = stack[stackSize];
+
+              console.log("stackNode = ", stack[stackSize]);
+
+              
+
+          }
+   
       }  
 
       /*currentNode = this.root;
