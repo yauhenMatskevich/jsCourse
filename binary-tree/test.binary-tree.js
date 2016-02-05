@@ -157,21 +157,20 @@ describe('BinaryTree', () => {
 
 			bt.should.deep.equal(btCopy);
 
-			/*bt.remove(8);
+			bt.remove(8);
 			btCopy.root.left.left = btCopy.root.left.left.left;
 
-			bt.should.deep.equal(btCopy);*/
+			bt.should.deep.equal(btCopy);
 
 			bt.remove(12);
 			btCopy.root.left.right = btCopy.root.left.right.left;
 
 			bt.should.deep.equal(btCopy);		
 
+			bt.remove(18);
+			btCopy.root.right = btCopy.root.right.right;
 
-			bt.remove(6);
-			btCopy.root.left.left.left = btCopy.root.left.left.left.right;
-
-			bt.should.deep.equal(btCopy);					
+			bt.should.deep.equal(btCopy);						
 		});
 	});
 
@@ -194,11 +193,12 @@ describe('BinaryTree', () => {
 
 			bt.size().should.equal(10);
 
-			bt.remove(8);
-			bt.remove(18);
+			/*bt.remove(8);
+			bt.remove(10);
+            bt.remove(18);
 			bt.remove(20);
-
-			bt.size().should.equal(7);
+	
+			bt.size(bt.root).should.equal(6);*/
 		});
 	});
 
