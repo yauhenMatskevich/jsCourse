@@ -4,9 +4,9 @@ class BinaryTree {
   //--------------------------------------------------------------
 	constructor() {
 
-         this.root = null;
-         
-         console.log('root', this.root);       
+      this.root = null;  
+      
+      console.log("root = ", this.root); 
 	}
   //--------------------------------------------------------------
 	insert(data) {
@@ -56,9 +56,9 @@ class BinaryTree {
   //--------------------------------------------------------------
   contains(data) {
 
-      console.log("data to find = ", data); 
-  
       var currentNode = this.root;
+
+      console.log("data to find = ", data);
 
       while(true) {  
 
@@ -69,7 +69,7 @@ class BinaryTree {
               return false;
           }  
 
-          console.log("currentNode.data = ", currentNode.data); 
+          //console.log("currentNode.data = ", currentNode.data); 
 
           if(data < currentNode.data) {
 
@@ -204,27 +204,12 @@ class BinaryTree {
       var currentNode = this.root;
       var stack = [];
       var stackSize = 0;
-      //var parrentNode = null;
-      
-    
-      /*if (currentNode == null) {     
-
-          console.log("totalNodes", totalNodes);              
-
-          return totalNodes;
-      } */ 
-
-      //totalNodes = 1;
 
       while(stackSize != 0 || currentNode != null) {
-
-          //currentNode = currentNode.left;  
+ 
           if(currentNode != null)  {
 
               totalNodes++;       
-
-              console.log("node = ", currentNode);
-              console.log("totalNodes = ", totalNodes);
 
               if(currentNode.right != null) {
 
@@ -243,42 +228,13 @@ class BinaryTree {
 
               currentNode = stack[stackSize];
 
-              console.log("stackNode = ", stack[stackSize]);
+              console.log("stackSize = ", stackSize);
 
-              
-
+              //console.log("stackNode = ", stack[stackSize]);             
           }
    
       }  
 
-      /*currentNode = this.root;
-
-      while(currentNode != null) {
-
-          if(currentNode.right != 0)   
-          {
-              totalNodes++;       
-          
-              console.log("node = ", currentNode);
-              console.log("data = ", currentNode.data);
-              console.log("totalNodes = ", totalNodes);
-          }
-          currentNode = currentNode.left;   
-      } */
-
-      /*if (node == null) 
-      {
-          return 0;
-
-      } 
-      else 
-      {
-          console.log("node = ", node);  
-
-          return (this.size(node.left) + 1 + this.size(node.right));
-          
-
-      } */
       console.log("totalNodes", totalNodes);  
 
       return totalNodes;

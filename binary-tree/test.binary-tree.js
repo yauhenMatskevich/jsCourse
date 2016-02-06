@@ -39,7 +39,7 @@ var expectedBt = {
 				right: null
 			}
 		}
-	},
+	}
 };
 
 describe('BinaryTree', () => {
@@ -67,8 +67,6 @@ describe('BinaryTree', () => {
 			bt.insert(6);
 			bt.insert(20);
 			bt.insert(7);
-
-			console.log("root = ", bt.root);
 		});
 
 		it('creates new node with passed data and inserts it to correct place', () => {
@@ -140,12 +138,6 @@ describe('BinaryTree', () => {
 			sinon.spy(bt, 'contains');
 
 			bt.remove(9);
-
-			console.log("bt = ", bt);
-
-            console.log("btCopy = ", btCopy);
-
-
 			bt.should.deep.equal(btCopy);
 		});
 
@@ -161,16 +153,6 @@ describe('BinaryTree', () => {
 			btCopy.root.left.left = btCopy.root.left.left.left;
 
 			bt.should.deep.equal(btCopy);
-
-			bt.remove(12);
-			btCopy.root.left.right = btCopy.root.left.right.left;
-
-			bt.should.deep.equal(btCopy);		
-
-			bt.remove(18);
-			btCopy.root.right = btCopy.root.right.right;
-
-			bt.should.deep.equal(btCopy);						
 		});
 	});
 
@@ -194,11 +176,10 @@ describe('BinaryTree', () => {
 			bt.size().should.equal(10);
 
 			bt.remove(8);
-			bt.remove(10);
-            bt.remove(18);
+			bt.remove(18);
 			bt.remove(20);
-	
-			bt.size(bt.root).should.equal(6);
+
+			bt.size().should.equal(7);
 		});
 	});
 
